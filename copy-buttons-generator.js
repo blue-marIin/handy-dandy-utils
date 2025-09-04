@@ -10,7 +10,7 @@
 
 (function() {
     'use strict';
-    function createCopyButtonsWrapper(idValue, nameValue, fontSize) {
+    window.createCopyButtonsWrapper = function(idValue, nameValue, fontSize) {
         const nameBtn = document.createElement('span');
 
         nameBtn.className = 'material-symbols-outlined';
