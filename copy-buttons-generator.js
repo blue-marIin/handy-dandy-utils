@@ -17,7 +17,7 @@
         nameBtn.title = 'Copy product name';
         nameBtn.textContent = 'content_copy';
         nameBtn.style.background = 'white';
-        nameBtn.style.color = 'rgba(145, 145, 145, 0.4)'
+        nameBtn.style.color = 'rgba(145, 145, 145, 0.4)';
         nameBtn.style.cursor = 'pointer';
         if (typeof fontSize !== 'undefined') nameBtn.style.fontSize = fontSize;
         nameBtn.style.zIndex = '99';
