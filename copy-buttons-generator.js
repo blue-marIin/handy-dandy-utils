@@ -27,8 +27,8 @@
                 .then(() => {
                 nameBtn.textContent = 'check_small';
                 setTimeout(() => nameBtn.textContent = 'content_copy', 1500);
-            })
-        })
+            });
+        });
 
         const idBtn = nameBtn.cloneNode(true);
 
@@ -40,8 +40,8 @@
                 .then(() => {
                 idBtn.textContent = 'check_small';
                 setTimeout(() => idBtn.textContent = 'pin', 1500);
-            })
-        })
+            });
+        });
 
         const wrapper = document.createElement('div');
         wrapper.style.display = 'inline-flex';
