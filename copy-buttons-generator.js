@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         Copy buttons generator
-// @namespace    http://tampermonkey.net/
+// @namespace    https://github.com/blue-marIin/
 // @version      1.0
-// @description  Helper functions for Umart & MSY scripts
+// @description  Helper function(s) for local scripts
 // @author       BLUE MARLIN
 // @match        -
 // @grant        none
@@ -10,6 +10,15 @@
 
 (function() {
     'use strict';
+    /**
+     * Creates copy buttons wrapped in a HTML div with given product ID and name values, at a given font size
+     * Requires Google Fonts' Material Symbols
+     * 
+     * @param {string} idValue - Product ID
+     * @param {string} nameValue - Product name
+     * @param {string} fontSize - Button font size
+     * @returns {HTMLElement} wrapper div containing both copy buttons
+     */
     window.createCopyButtonsWrapper = function(idValue, nameValue, fontSize) {
         const nameBtn = document.createElement('span');
 
