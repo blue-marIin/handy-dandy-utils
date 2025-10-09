@@ -67,15 +67,17 @@
         },
 
         /**
-         * Add Google's Material Symbols content_copy icon request to document head tag
+         * Add Google's Material Symbols content_copy & pin icons request to document head tag
          */
         loadGoogleFontsIcons() {
             console.log('[Remote Script (01)] loadGoogleFontsIcons called');
 
             const link = document.createElement('link');
             link.rel = 'stylesheet';
-            link.href = 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&icon_names=content_copy'; //:opsz,wght,FILL,GRAD@20..48,400,0,0';
+            link.href = 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&icon_names=content_copy,pin'; //:opsz,wght,FILL,GRAD@20..48,400,0,0';
             document.head.appendChild(link); // error checking needed?
         }
     };
+
+    window.remoteScript01 = remoteScript01;
 })();
