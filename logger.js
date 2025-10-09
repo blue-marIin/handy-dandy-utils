@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         (Logger)Script logging utility
+// @name         (Logger) Script logging utility
 // @namespace    https://github.com/blue-marIin/
 // @version      1.0
 // @description  Shared logger utility for other userscripts

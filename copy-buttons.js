@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         (CopyButtons)Copy buttons generator
+// @name         (CopyButtons) Copy buttons generator
 // @namespace    https://github.com/blue-marIin/
 // @version      1.0
 // @description  Helper function(s) for local scripts inserting product copy buttons
