@@ -19,8 +19,10 @@
      *   log.info('Remote script:', remoteScript?.scriptTag);
      *   log.end();
      */
-    window.Logger = function(scriptTag) {
-        const prefix = `%c${scriptTag}`;
+    window.Logger = function(inputScriptTag) {
+        const scriptTag = 'Logger'; // This script's own script ID
+
+        const prefix = `%c${inputScriptTag}`;
         const style = 'color: rgba(0, 179, 255, 1); font-weight: bold';
         const group = () => console.groupCollapsed(prefix, style);
         const groupEnd = () => console.groupEnd();
@@ -41,13 +43,6 @@
             },
             end() {
                 groupEnd();
-            },
-            checkGM(...names) {
-                // Utility to log GM_* grants
-                names.forEach(n => {
-                    const available = typeof window[n] !== 'undefined';
-                    console.log(prefix, style, `${n}: ${available ? '✅ available' : '❌ missing'}`);
-                });
             }
         };
     };
