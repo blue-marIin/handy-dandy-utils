@@ -11,9 +11,9 @@
 (function() {
     'use strict';
 
-    console.log('[Remote Script (01)] Loaded');
-
     window.CopyButtons = {
+        scriptTag: '[CopyButtons]',
+
         /**
          * Creates copy buttons wrapped in a HTML div with given product ID and name values, at a given font size
          * Requires Google Fonts' Material Symbols
@@ -24,7 +24,7 @@
          * @returns {HTMLElement} wrapper div containing both copy buttons
          */
         createCopyButtonsWrapper(idValue, nameValue, fontSize) {
-            console.log('[Remote Script (01)] createCopyButtonsWrapper called');
+            console.log(`${scriptTag} createCopyButtonsWrapper called`); // Keep basic console.log for remote scripts
 
             const nameBtn = document.createElement('span');
 
@@ -70,7 +70,7 @@
          * Add Google's Material Symbols content_copy & pin icons request to document head tag
          */
         loadGoogleFontsIcons() {
-            console.log('[Remote Script (01)] loadGoogleFontsIcons called');
+            console.log(`${scriptTag} loadGoogleFontsIcons called`);
 
             const link = document.createElement('link');
             link.rel = 'stylesheet';
