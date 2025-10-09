@@ -22,7 +22,7 @@
      * @param {string} fontSize - Button font size
      * @returns {HTMLElement} wrapper div containing both copy buttons
      */
-    window.createCopyButtonsWrapper = function(idValue, nameValue, fontSize) {
+    remoteScript01.createCopyButtonsWrapper = function(idValue, nameValue, fontSize) {
         console.log('[Remote Script (01)]: createCopyButtonsWrapper called');
 
         const nameBtn = document.createElement('span');
@@ -65,12 +65,15 @@
         return wrapper;
     }
 
-    window.loadGoogleFontsIcons = function() {
+    /**
+     * Add Google's Material Symbols content_copy icon request to document head tag
+     */
+    remoteScript01.loadGoogleFontsIcons = function() {
         console.log('[Remote Script (01)]: loadGoogleFontsIcons called');
 
         const link = document.createElement('link');
         link.rel = 'stylesheet';
-        link.href = 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined'; //:opsz,wght,FILL,GRAD@20..48,400,0,0';
+        link.href = 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&icon_names=content_copy'; //:opsz,wght,FILL,GRAD@20..48,400,0,0';
         document.head.appendChild(link); // error checking needed?
     }
 })();
