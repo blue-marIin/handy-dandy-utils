@@ -22,7 +22,7 @@
          *   log.info('Remote script:', remoteScript?.scriptTag);
          *   log.end();
          */
-        function(inputScriptTag) {
+        init(inputScriptTag) {
             const prefix = `%c${inputScriptTag}`;
             const style = 'color: rgba(0, 179, 255, 1); font-weight: bold';
             const group = () => console.groupCollapsed(prefix, style);
@@ -48,6 +48,6 @@
             };
         }
     };
-    
+
     //console.log('%c[Logger] Loaded', 'color:#0a0; font-weight:bold;');
 })();

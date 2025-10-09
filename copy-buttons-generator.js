@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         (01)[EXT]Copy buttons generator
+// @name         (CopyButtons)Copy buttons generator
 // @namespace    https://github.com/blue-marIin/
 // @version      1.0
-// @description  Helper function(s) for local scripts
+// @description  Helper function(s) for local scripts inserting product copy buttons
 // @author       BLUE MARLIN
 // @match        -
 // @grant        none
@@ -13,7 +13,7 @@
 
     console.log('[Remote Script (01)] Loaded');
 
-    window.remoteScript01 = {
+    window.CopyButtons = {
         /**
          * Creates copy buttons wrapped in a HTML div with given product ID and name values, at a given font size
          * Requires Google Fonts' Material Symbols
