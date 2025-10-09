@@ -13,8 +13,7 @@
 
     console.log('[Remote Script (01)] Loaded');
 
-    window.remoteScript = {
-
+    window.remoteScript01 = {
         /**
          * Creates copy buttons wrapped in a HTML div with given product ID and name values, at a given font size
          * Requires Google Fonts' Material Symbols
