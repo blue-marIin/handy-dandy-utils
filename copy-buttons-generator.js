@@ -11,6 +11,8 @@
 (function() {
     'use strict';
 
+    console.log('[Remote Script (01)]: Loaded');
+
     /**
      * Creates copy buttons wrapped in a HTML div with given product ID and name values, at a given font size
      * Requires Google Fonts' Material Symbols
@@ -21,7 +23,7 @@
      * @returns {HTMLElement} wrapper div containing both copy buttons
      */
     window.createCopyButtonsWrapper = function(idValue, nameValue, fontSize) {
-        console.log('[Remote Script (01)]: Running');
+        console.log('[Remote Script (01)]: createCopyButtonsWrapper called');
 
         const nameBtn = document.createElement('span');
 
@@ -61,5 +63,14 @@
         wrapper.appendChild(nameBtn);
 
         return wrapper;
+    }
+
+    window.loadGoogleFontsIcons = function() {
+        console.log('[Remote Script (01)]: loadGoogleFontsIcons called');
+
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined'; //:opsz,wght,FILL,GRAD@20..48,400,0,0';
+        document.head.appendChild(link); // error checking needed?
     }
 })();
