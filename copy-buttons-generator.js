@@ -24,7 +24,7 @@
          * @returns {HTMLElement} wrapper div containing both copy buttons
          */
         createCopyButtonsWrapper(idValue, nameValue, fontSize) {
-            console.log(`${scriptTag} createCopyButtonsWrapper called`); // Keep basic console.log for remote scripts
+            console.log(`${this.scriptTag} createCopyButtonsWrapper called`); // Keep basic console.log for remote scripts
 
             const nameBtn = document.createElement('span');
 
@@ -70,7 +70,7 @@
          * Add Google's Material Symbols content_copy & pin icons request to document head tag
          */
         loadGoogleFontsIcons() {
-            console.log(`${scriptTag} loadGoogleFontsIcons called`);
+            console.log(`${this.scriptTag} loadGoogleFontsIcons called`);
 
             const link = document.createElement('link');
             link.rel = 'stylesheet';
