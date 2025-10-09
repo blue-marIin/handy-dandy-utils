@@ -11,41 +11,43 @@
 (function() {
     'use strict';
 
-    /**
-     * Lightweight console logging helper for userscripts.
-     * Usage example:
-     *   const log = Logger('[MYSCRIPT]');
-     *   log.start();
-     *   log.info('Remote script:', remoteScript?.scriptTag);
-     *   log.end();
-     */
-    window.Logger = function(inputScriptTag) {
-        const scriptTag = 'Logger'; // This script's own script ID
+    window.Logger = {
+        scriptTag: '[Logger]', // This script's own script ID
 
-        const prefix = `%c${inputScriptTag}`;
-        const style = 'color: rgba(0, 179, 255, 1); font-weight: bold';
-        const group = () => console.groupCollapsed(prefix, style);
-        const groupEnd = () => console.groupEnd();
+        /**
+         * Lightweight console logging helper for userscripts.
+         * Usage example:
+         *   const log = Logger('[MYSCRIPT]');
+         *   log.start();
+         *   log.info('Remote script:', remoteScript?.scriptTag);
+         *   log.end();
+         */
+        function(inputScriptTag) {
+            const prefix = `%c${inputScriptTag}`;
+            const style = 'color: rgba(0, 179, 255, 1); font-weight: bold';
+            const group = () => console.groupCollapsed(prefix, style);
+            const groupEnd = () => console.groupEnd();
 
-        return {
-            start(msg = 'Running') {
-                group();
-                console.log(prefix, style, msg);
-            },
-            info(...args) {
-                console.log(prefix, style, ...args);
-            },
-            warn(...args) {
-                console.warn(prefix, style, ...args);
-            },
-            error(...args) {
-                console.error(prefix, style, ...args);
-            },
-            end() {
-                groupEnd();
-            }
-        };
+            return {
+                start(msg = 'Running') {
+                    group();
+                    console.log(prefix, style, msg);
+                },
+                info(...args) {
+                    console.log(prefix, style, ...args);
+                },
+                warn(...args) {
+                    console.warn(prefix, style, ...args);
+                },
+                error(...args) {
+                    console.error(prefix, style, ...args);
+                },
+                end() {
+                    groupEnd();
+                }
+            };
+        }
     };
-
+    
     //console.log('%c[Logger] Loaded', 'color:#0a0; font-weight:bold;');
 })();
