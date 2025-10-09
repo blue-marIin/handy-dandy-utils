@@ -78,6 +78,4 @@
             document.head.appendChild(link); // error checking needed?
         }
     };
-
-    window.remoteScript01 = remoteScript01;
 })();
