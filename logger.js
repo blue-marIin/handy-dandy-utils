@@ -13,6 +13,8 @@
 
     window.Logger = {
         scriptTag: '[Logger]', // This script's own script ID
+        // Might be an idea to store all script ID tags in external, centralised location?
+        // Would have to be on local server which is subpar
 
         /**
          * Lightweight console logging helper for userscripts.
