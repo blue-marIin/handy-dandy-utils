@@ -74,7 +74,7 @@
 
             const link = document.createElement('link');
             link.rel = 'stylesheet';
-            link.href = 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&icon_names=check_smallcontent_copy,pin'; //:opsz,wght,FILL,GRAD@20..48,400,0,0';
+            link.href = 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&icon_names=check_small,content_copy,pin'; //:opsz,wght,FILL,GRAD@20..48,400,0,0';
             document.head.appendChild(link); // error checking needed?
         }
     };
