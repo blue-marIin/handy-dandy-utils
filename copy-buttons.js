@@ -20,22 +20,26 @@
          * 
          * @param {string} idValue - Product ID
          * @param {string} nameValue - Product name
-         * @param {string} fontSize - Button font size
+         * @param {object} divStyling - Button styling eg: fontSize, gap, top
          * @returns {HTMLElement} wrapper div containing both copy buttons
          */
-        createCopyButtonsWrapper(idValue, nameValue, fontSize) {
+        createCopyButtonsWrapper(idValue, nameValue, divStyling) {
             console.log(`${this.scriptTag} createCopyButtonsWrapper called`); // Keep basic console.log for remote scripts
 
             const nameBtn = document.createElement('span');
 
+            // ========= TODO: REFACTOR =========
             nameBtn.className = 'material-symbols-outlined';
-            nameBtn.title = 'Copy product name';
             nameBtn.textContent = 'content_copy';
+            nameBtn.title = 'Copy product name';
             //nameBtn.style.background = 'white';
             nameBtn.style.color = 'rgba(145, 145, 145, 0.4)';
             nameBtn.style.cursor = 'pointer';
-            if (typeof fontSize !== 'undefined') nameBtn.style.fontSize = fontSize;
             nameBtn.style.zIndex = '99';
+            // ==================================
+
+            if (typeof divStyling !== 'undefined') Object.assign(nameBtn.style, divStyling);
+            // Otherwise, if no styling specified then inherit page's native styling
 
             nameBtn.addEventListener('click', () => {
                 navigator.clipboard.writeText(nameValue)
@@ -47,8 +51,10 @@
 
             const idBtn = nameBtn.cloneNode(true);
 
+            // ========= TODO: REFACTOR =========
             idBtn.title = 'Copy product ID';
             idBtn.textContent = 'pin';
+            // ==================================
 
             idBtn.addEventListener('click', () => {
                 navigator.clipboard.writeText(idValue)
