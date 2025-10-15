@@ -8,11 +8,21 @@
 // @grant        none
 // ==/UserScript==
 
+import idButtonStyling from './styling/copyProductIdButton.json' assert { type: 'json' };
+import nameButtonStyling from './styling/copyProductNameButton.json' assert { type: 'json' };
+import divWrapperStyling from './styling/divWrapper.json' assert { type: 'json' };
+
 (function() {
     'use strict';
 
     window.CopyButtons = {
         scriptTag: '[CopyButtons]',
+
+        IconType: { // enumerated - in the future can be swapped out with desired g fonts icons :O
+            CHECK: 'check_small',
+            ID: 'pin',
+            NAME: 'content_copy'
+        },
 
         /**
          * Creates copy buttons wrapped in a HTML div with given product ID and name values, at a given font size
@@ -20,56 +30,43 @@
          * 
          * @param {string} idValue - Product ID
          * @param {string} nameValue - Product name
-         * @param {object} divStyling - Button styling eg: fontSize, gap, top
+         * @param {object} divStyling - Button styling eg: { fontSize: '12px', gap: '1px', top '30%' }
          * @returns {HTMLElement} wrapper div containing both copy buttons
          */
         createCopyButtonsWrapper(idValue, nameValue, divStyling) {
             console.log(`${this.scriptTag} createCopyButtonsWrapper called`); // Keep basic console.log for remote scripts
 
-            const nameBtn = document.createElement('span');
-
-            // ========= TODO: REFACTOR =========
-            nameBtn.className = 'material-symbols-outlined';
-            nameBtn.textContent = 'content_copy';
-            nameBtn.title = 'Copy product name';
-            //nameBtn.style.background = 'white';
-            nameBtn.style.color = 'rgba(145, 145, 145, 0.4)';
-            nameBtn.style.cursor = 'pointer';
-            nameBtn.style.zIndex = '99';
-            // ==================================
-
-            if (typeof divStyling !== 'undefined') Object.assign(nameBtn.style, divStyling);
-            // Otherwise, if no styling specified then inherit page's native styling
-
-            nameBtn.addEventListener('click', () => {
-                navigator.clipboard.writeText(nameValue)
-                    .then(() => {
-                    nameBtn.textContent = 'check_small';
-                    setTimeout(() => nameBtn.textContent = 'content_copy', 1500);
-                });
-            });
-
-            const idBtn = nameBtn.cloneNode(true);
-
-            // ========= TODO: REFACTOR =========
-            idBtn.title = 'Copy product ID';
-            idBtn.textContent = 'pin';
-            // ==================================
-
-            idBtn.addEventListener('click', () => {
-                navigator.clipboard.writeText(idValue)
-                    .then(() => {
-                    idBtn.textContent = 'check_small';
-                    setTimeout(() => idBtn.textContent = 'pin', 1500);
-                });
-            });
+            idButton = createCopyButton(IconType.NAME, idValue);
+            nameButton = createCopyButton(IconType.ID, nameValue);
 
             const wrapper = document.createElement('div');
-            wrapper.style.display = 'inline-flex';
+
+            if (typeof divStyling !== 'undefined') Object.assign(wrapper.style, divStyling);
+            if (divWrapperStyling) Object.assign(wrapper.style, divWrapperStyling);
+
             wrapper.appendChild(idBtn);
             wrapper.appendChild(nameBtn);
 
             return wrapper;
+        },
+
+        createCopyButton(type, buttonCopyData) {
+            const button = document.createElement('span');
+
+            if (type === IconType.ID) {
+                Object.assign(button.style, idButtonStyling);
+            } else {
+                Object.assign(button.style, nameButtonStyling);
+            }
+
+            button.addEventListener('click', () => {
+                navigator.clipboard.writeText(buttonCopyData)
+                    .then(() => {
+                    button.textContent = IconType.CHECK;
+                    setTimeout(() => button.textContent = type, 1500);
+                });
+            });
+            return button
         },
 
         /**
@@ -80,7 +77,7 @@
 
             const link = document.createElement('link');
             link.rel = 'stylesheet';
-            link.href = 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&icon_names=check_small,content_copy,pin'; //:opsz,wght,FILL,GRAD@20..48,400,0,0';
+            link.href = `https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&icon_names=${IconType.CHECK},${IconType.NAME},${IconType.ID}`;
             document.head.appendChild(link); // error checking needed?
         }
     };
