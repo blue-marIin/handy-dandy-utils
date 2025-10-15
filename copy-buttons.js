@@ -24,6 +24,27 @@ import divWrapperStyling from './styling/divWrapper.json' assert { type: 'json' 
             NAME: 'content_copy'
         },
 
+        idButtonStyling: {
+            "className": "material-symbols-outlined",
+            "textContent": `${IconType.ID}`,
+            "title": "Copy product ID"
+        },
+
+        nameButtonStyling: {
+            "className": "material-symbols-outlined",
+            "textContent": `${IconType.NAME}`,
+            "title": "Copy product name"
+        },
+
+        divWrapperStyling: {
+            "style.color": "rgba(145, 145, 145, 0.4)",
+            "style.cursor": "pointer",
+            "style.display": "inline-flex",
+            "style.zIndex": "99"
+        },
+
+        link: `https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&icon_names=${IconType.CHECK},${IconType.NAME},${IconType.ID}`,
+
         /**
          * Creates copy buttons wrapped in a HTML div with given product ID and name values, at a given font size
          * Requires Google Fonts' Material Symbols
@@ -41,8 +62,8 @@ import divWrapperStyling from './styling/divWrapper.json' assert { type: 'json' 
 
             const wrapper = document.createElement('div');
 
-            if (typeof divStyling !== 'undefined') Object.assign(wrapper.style, divStyling);
             if (divWrapperStyling) Object.assign(wrapper.style, divWrapperStyling);
+            if (typeof divStyling !== 'undefined') Object.assign(wrapper.style, divStyling);
 
             wrapper.appendChild(idBtn);
             wrapper.appendChild(nameBtn);
@@ -77,7 +98,7 @@ import divWrapperStyling from './styling/divWrapper.json' assert { type: 'json' 
 
             const link = document.createElement('link');
             link.rel = 'stylesheet';
-            link.href = `https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&icon_names=${IconType.CHECK},${IconType.NAME},${IconType.ID}`;
+            link.href = ;
             document.head.appendChild(link); // error checking needed?
         }
     };
