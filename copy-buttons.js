@@ -44,6 +44,8 @@
             ${IconType.CHECK},${IconType.NAME},${IconType.ID}
             `,
 
+        buttonCheckTimeout: 1500,
+
         /**
          * Creates copy buttons wrapped in a HTML div with given product ID and name values, at a given font size
          * Requires Google Fonts' Material Symbols
@@ -89,7 +91,7 @@
                 navigator.clipboard.writeText(buttonCopyData)
                     .then(() => {
                     button.textContent = IconType.CHECK;
-                    setTimeout(() => button.textContent = buttonType, 1500);
+                    setTimeout(() => button.textContent = buttonType, buttonCheckTimeout);
                 });
             });
             return button
