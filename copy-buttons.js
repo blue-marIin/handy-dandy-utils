@@ -32,7 +32,7 @@
             "title": "Copy product name"
         },
 
-        divWrapperStyling: {
+        baseDivWrapperStyling: { // Base styling shared across all instances of copy buttons
             "style.color": "rgba(145, 145, 145, 0.4)",
             "style.cursor": "pointer",
             "style.display": "inline-flex",
@@ -52,10 +52,11 @@
          * 
          * @param {string} idValue - Product ID value to be copied
          * @param {string} nameValue - Product name value to be copied
-         * @param {object} additionalDivWrapperStyling - Tweak style further, eg: { fontSize: '12px', gap: '1px', top '30%' }
+         * @param {object} additionalDivWrapperStyling - Tweak style further for different insertion contexts
+         *      eg: { fontSize: '12px', gap: '1px', top '30%' }
          * @returns {HTMLElement} wrapper div containing both copy buttons
          */
-        createCopyButtonsWrapper(idValue, nameValue, divStyling) {
+        createCopyButtonsWrapper(idValue, nameValue, additionalDivWrapperStyling) {
             console.log(`${this.scriptTag} createCopyButtonsWrapper called`); // Keep basic console.log for remote scripts
 
             idButton = createCopyButton(IconType.NAME, idValue);
@@ -63,11 +64,11 @@
 
             const wrapper = document.createElement('div');
 
-            if (divWrapperStyling) Object.assign(wrapper.style, divWrapperStyling);
-            if (typeof divStyling !== 'undefined') Object.assign(wrapper.style, divStyling);
+            Object.assign(wrapper.style, baseDivWrapperStyling);
+            if (typeof additionalDivWrapperStyling !== 'undefined') Object.assign(wrapper.style, additionalDivWrapperStyling);
 
-            wrapper.appendChild(idBtn);
-            wrapper.appendChild(nameBtn);
+            wrapper.appendChild(idButton);
+            wrapper.appendChild(nameButton);
 
             return wrapper;
         },
