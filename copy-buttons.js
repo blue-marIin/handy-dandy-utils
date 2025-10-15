@@ -8,17 +8,13 @@
 // @grant        none
 // ==/UserScript==
 
-import idButtonStyling from './styling/copyProductIdButton.json' assert { type: 'json' };
-import nameButtonStyling from './styling/copyProductNameButton.json' assert { type: 'json' };
-import divWrapperStyling from './styling/divWrapper.json' assert { type: 'json' };
-
 (function() {
     'use strict';
 
     window.CopyButtons = {
         scriptTag: '[CopyButtons]',
 
-        IconType: { // enumerated - in the future can be swapped out with desired g fonts icons :O
+        IconType: {
             CHECK: 'check_small',
             ID: 'pin',
             NAME: 'content_copy'
@@ -43,15 +39,18 @@ import divWrapperStyling from './styling/divWrapper.json' assert { type: 'json' 
             "style.zIndex": "99"
         },
 
-        link: `https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&icon_names=${IconType.CHECK},${IconType.NAME},${IconType.ID}`,
+        googleFontsImportLink: `
+            https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&icon_names=
+            ${IconType.CHECK},${IconType.NAME},${IconType.ID}
+            `,
 
         /**
          * Creates copy buttons wrapped in a HTML div with given product ID and name values, at a given font size
          * Requires Google Fonts' Material Symbols
          * 
-         * @param {string} idValue - Product ID
-         * @param {string} nameValue - Product name
-         * @param {object} divStyling - Button styling eg: { fontSize: '12px', gap: '1px', top '30%' }
+         * @param {string} idValue - Product ID value to be copied
+         * @param {string} nameValue - Product name value to be copied
+         * @param {object} additionalDivWrapperStyling - Tweak style further, eg: { fontSize: '12px', gap: '1px', top '30%' }
          * @returns {HTMLElement} wrapper div containing both copy buttons
          */
         createCopyButtonsWrapper(idValue, nameValue, divStyling) {
@@ -71,10 +70,16 @@ import divWrapperStyling from './styling/divWrapper.json' assert { type: 'json' 
             return wrapper;
         },
 
-        createCopyButton(type, buttonCopyData) {
+        /**
+         * Create button element and assign value, styling and listener
+         * @param {string} buttonType 
+         * @param {string} buttonCopyData 
+         * @returns {HTMLElement}
+         */
+        createCopyButton(buttonType, buttonCopyData) {
             const button = document.createElement('span');
 
-            if (type === IconType.ID) {
+            if (buttonType === IconType.ID) {
                 Object.assign(button.style, idButtonStyling);
             } else {
                 Object.assign(button.style, nameButtonStyling);
@@ -84,7 +89,7 @@ import divWrapperStyling from './styling/divWrapper.json' assert { type: 'json' 
                 navigator.clipboard.writeText(buttonCopyData)
                     .then(() => {
                     button.textContent = IconType.CHECK;
-                    setTimeout(() => button.textContent = type, 1500);
+                    setTimeout(() => button.textContent = buttonType, 1500);
                 });
             });
             return button
@@ -98,8 +103,8 @@ import divWrapperStyling from './styling/divWrapper.json' assert { type: 'json' 
 
             const link = document.createElement('link');
             link.rel = 'stylesheet';
-            link.href = ;
-            document.head.appendChild(link); // error checking needed?
+            link.href = googleFontsImportLink;
+            document.head.appendChild(link); // error checking needed? eg: try fetch(link), catch(error)
         }
     };
 })();
