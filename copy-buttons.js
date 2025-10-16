@@ -11,41 +11,46 @@
 (function() {
     'use strict';
 
-    window.CopyButtons = {
+    const CB_CONSTANTS = {
         scriptTag: '[CopyButtons]',
+
+        buttonCheckTimeout: 1500,
 
         IconType: {
             CHECK: 'check_small',
             ID: 'pin',
             NAME: 'content_copy'
-        },
+        }
+    };
 
-        idButtonStyling: {
+    const googleFontsImportLink = `
+        https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&icon_names=
+        ${CB_CONSTANTS.IconType.CHECK},${CB_CONSTANTS.IconType.NAME},${CB_CONSTANTS.IconType.ID}
+    `;
+
+    const CB_BASE_STYLE ={
+        idButton: {
             "className": "material-symbols-outlined",
-            "textContent": `${IconType.ID}`,
+            "textContent": `${CB_CONSTANTS.IconType.ID}`,
             "title": "Copy product ID"
         },
 
-        nameButtonStyling: {
+        nameButton: {
             "className": "material-symbols-outlined",
-            "textContent": `${IconType.NAME}`,
+            "textContent": `${CB_CONSTANTS.NAME}`,
             "title": "Copy product name"
         },
 
-        baseDivWrapperStyling: { // Base styling shared across all instances of copy buttons
+        divWrapper: { // Base styling shared across all instances of copy buttons
             "style.color": "rgba(145, 145, 145, 0.4)",
             "style.cursor": "pointer",
             "style.display": "inline-flex",
             "style.zIndex": "99"
-        },
+        }
+    };
 
-        googleFontsImportLink: `
-            https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&icon_names=
-            ${IconType.CHECK},${IconType.NAME},${IconType.ID}
-            `,
-
-        buttonCheckTimeout: 1500,
-
+    // ===== MAIN =====
+    window.CopyButtons = {
         /**
          * Creates copy buttons wrapped in a HTML div with given product ID and name values, at a given font size
          * Requires Google Fonts' Material Symbols
@@ -64,7 +69,7 @@
 
             const wrapper = document.createElement('div');
 
-            Object.assign(wrapper.style, baseDivWrapperStyling);
+            Object.assign(wrapper.style, CB_BASE_STYLE.divWrapper);
             if (typeof additionalDivWrapperStyling !== 'undefined') Object.assign(wrapper.style, additionalDivWrapperStyling);
 
             wrapper.appendChild(idButton);
@@ -83,16 +88,16 @@
             const button = document.createElement('span');
 
             if (buttonType === IconType.ID) {
-                Object.assign(button.style, idButtonStyling);
+                Object.assign(button.style, CB_BASE_STYLE.idButton);
             } else {
-                Object.assign(button.style, nameButtonStyling);
+                Object.assign(button.style, CB_BASE_STYLE.nameButton);
             }
 
             button.addEventListener('click', () => {
                 navigator.clipboard.writeText(buttonCopyData)
                     .then(() => {
                     button.textContent = IconType.CHECK;
-                    setTimeout(() => button.textContent = buttonType, buttonCheckTimeout);
+                    setTimeout(() => button.textContent = buttonType, CB_CONSTANTS.buttonCheckTimeout);
                 });
             });
             return button
