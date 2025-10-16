@@ -22,8 +22,7 @@
     };
 
     const googleFontsImportLink = `
-        https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&icon_names=
-        ${CB_CONSTANTS.IconType.CHECK},${CB_CONSTANTS.IconType.NAME},${CB_CONSTANTS.IconType.ID}
+        https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&icon_names=${CB_CONSTANTS.IconType.CHECK},${CB_CONSTANTS.IconType.NAME},${CB_CONSTANTS.IconType.ID}
     `;
 
     const CB_BASE_STYLE ={
