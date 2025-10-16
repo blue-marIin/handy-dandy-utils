@@ -11,8 +11,8 @@
 (function() {
     'use strict';
 
-    window.Fetch = {
-        scriptTag: 'Fetch',
+    window.Fetcher = {
+        scriptTag: '[Fetcher]',
 
         loadScript(url) {
             return new Promise((resolve, reject) => {
