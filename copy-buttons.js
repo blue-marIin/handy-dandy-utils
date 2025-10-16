@@ -12,8 +12,6 @@
     'use strict';
 
     const CB_CONSTANTS = {
-        scriptTag: '[CopyButtons]',
-
         buttonCheckTimeout: 1500,
 
         IconType: {
@@ -51,6 +49,8 @@
 
     // ===== MAIN =====
     window.CopyButtons = {
+        scriptTag: '[CopyButtons]',
+
         /**
          * Creates copy buttons wrapped in a HTML div with given product ID and name values, at a given font size
          * Requires Google Fonts' Material Symbols
