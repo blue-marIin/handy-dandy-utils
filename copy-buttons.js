@@ -63,8 +63,8 @@
         createCopyButtonsWrapper(idValue, nameValue, additionalDivWrapperStyling) {
             console.log(`${this.scriptTag} createCopyButtonsWrapper called`); // Keep basic console.log for remote scripts
 
-            const idButton = createCopyButton(IconType.NAME, idValue);
-            const nameButton = createCopyButton(IconType.ID, nameValue);
+            const idButton = this.createCopyButton(IconType.NAME, idValue);
+            const nameButton = this.createCopyButton(IconType.ID, nameValue);
 
             const wrapper = document.createElement('div');
 
