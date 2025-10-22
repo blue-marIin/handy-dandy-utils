@@ -34,7 +34,7 @@
 
         nameButton: {
             "className": "material-symbols-outlined",
-            "textContent": `${CB_CONSTANTS.NAME}`,
+            "textContent": `${CB_CONSTANTS.IconType.NAME}`,
             "title": "Copy product name"
         },
 
@@ -63,8 +63,8 @@
         createCopyButtonsWrapper(idValue, nameValue, additionalDivWrapperStyling) {
             console.log(`${this.scriptTag} createCopyButtonsWrapper called`); // Keep basic console.log for remote scripts
 
-            const idButton = this.createCopyButton(IconType.NAME, idValue);
-            const nameButton = this.createCopyButton(IconType.ID, nameValue);
+            const idButton = this.createCopyButton(CB_CONSTANTS.IconType.NAME, idValue);
+            const nameButton = this.createCopyButton(CB_CONSTANTS.IconType.ID, nameValue);
 
             const wrapper = document.createElement('div');
 
@@ -86,7 +86,7 @@
         createCopyButton(buttonType, buttonCopyData) {
             const button = document.createElement('span');
 
-            if (buttonType === IconType.ID) {
+            if (buttonType === CB_CONSTANTS.IconType.ID) {
                 Object.assign(button.style, CB_BASE_STYLE.idButton);
             } else {
                 Object.assign(button.style, CB_BASE_STYLE.nameButton);
@@ -95,7 +95,7 @@
             button.addEventListener('click', () => {
                 navigator.clipboard.writeText(buttonCopyData)
                     .then(() => {
-                    button.textContent = IconType.CHECK;
+                    button.textContent = CB_CONSTANTS.IconType.CHECK;
                     setTimeout(() => button.textContent = buttonType, CB_CONSTANTS.buttonCheckTimeout);
                 });
             });
