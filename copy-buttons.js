@@ -25,24 +25,32 @@
         https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&icon_names=${CB_CONSTANTS.IconType.CHECK},${CB_CONSTANTS.IconType.NAME},${CB_CONSTANTS.IconType.ID}
     `;
 
-    const CB_BASE_STYLE ={
+    const CB_BASE_STYLE = {
         idButton: {
-            "className": "material-symbols-outlined",
-            "textContent": `${CB_CONSTANTS.IconType.ID}`,
-            "title": "Copy product ID"
+            className: "material-symbols-outlined",
+            textContent: CB_CONSTANTS.IconType.ID,
+            title: "Copy product ID",
+            style: {
+                color: "rgba(145, 145, 145, 0.4)",
+                cursor: "pointer",
+            }
         },
 
         nameButton: {
-            "className": "material-symbols-outlined",
-            "textContent": `${CB_CONSTANTS.IconType.NAME}`,
-            "title": "Copy product name"
+            className: "material-symbols-outlined",
+            textContent: CB_CONSTANTS.IconType.NAME,
+            title: "Copy product name",
+            style: {
+                color: "rgba(145, 145, 145, 0.4)",
+                cursor: "pointer",
+            }
         },
 
-        divWrapper: { // Base styling shared across all instances of copy buttons
-            "style.color": "rgba(145, 145, 145, 0.4)",
-            "style.cursor": "pointer",
-            "style.display": "inline-flex",
-            "style.zIndex": "99"
+        divWrapper: {
+            color: "rgba(145, 145, 145, 0.4)",
+            cursor: "pointer",
+            display: "inline-flex",
+            zIndex: "99"
         }
     };
 
@@ -85,21 +93,25 @@
          */
         createCopyButton(buttonType, buttonCopyData) {
             const button = document.createElement('span');
+            const styleConfig = (buttonType === CB_CONSTANTS.IconType.ID)
+                ? CB_BASE_STYLE.idButton
+                : CB_BASE_STYLE.nameButton;
 
-            if (buttonType === CB_CONSTANTS.IconType.ID) {
-                Object.assign(button.style, CB_BASE_STYLE.idButton);
-            } else {
-                Object.assign(button.style, CB_BASE_STYLE.nameButton);
-            }
+            button.className = styleConfig.className;
+            button.textContent = styleConfig.textContent;
+            button.title = styleConfig.title;
+
+            Object.assign(button.style, styleConfig.style);
 
             button.addEventListener('click', () => {
                 navigator.clipboard.writeText(buttonCopyData)
                     .then(() => {
-                    button.textContent = CB_CONSTANTS.IconType.CHECK;
-                    setTimeout(() => button.textContent = buttonType, CB_CONSTANTS.buttonCheckTimeout);
-                });
+                        button.textContent = CB_CONSTANTS.IconType.CHECK;
+                        setTimeout(() => button.textContent = buttonType, CB_CONSTANTS.buttonCheckTimeout);
+                    });
             });
-            return button
+
+            return button;
         },
 
         /**
