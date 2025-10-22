@@ -31,8 +31,8 @@
             textContent: CB_CONSTANTS.IconType.ID,
             title: "Copy product ID",
             style: {
-                color: "rgba(145, 145, 145, 0.4)",
                 cursor: "pointer",
+                fontSize: "1.2em"
             }
         },
 
@@ -41,14 +41,13 @@
             textContent: CB_CONSTANTS.IconType.NAME,
             title: "Copy product name",
             style: {
-                color: "rgba(145, 145, 145, 0.4)",
                 cursor: "pointer",
+                fontSize: "1.2em"
             }
         },
 
         divWrapper: {
             color: "rgba(145, 145, 145, 0.4)",
-            cursor: "pointer",
             display: "inline-flex",
             zIndex: "99"
         }
