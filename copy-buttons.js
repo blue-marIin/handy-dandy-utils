@@ -78,8 +78,8 @@
             Object.assign(wrapper.style, CB_BASE_STYLE.divWrapper);
             if (typeof additionalDivWrapperStyling !== 'undefined') Object.assign(wrapper.style, additionalDivWrapperStyling);
 
-            wrapper.appendChild(idButton);
             wrapper.appendChild(nameButton);
+            wrapper.appendChild(idButton);
 
             return wrapper;
         },
