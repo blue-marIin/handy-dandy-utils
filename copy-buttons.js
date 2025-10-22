@@ -32,7 +32,6 @@
             title: "Copy product ID",
             style: {
                 cursor: "pointer",
-                fontSize: "1.2em"
             }
         },
 
@@ -42,7 +41,6 @@
             title: "Copy product name",
             style: {
                 cursor: "pointer",
-                fontSize: "1.2em"
             }
         },
 
