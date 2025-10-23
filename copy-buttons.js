@@ -59,17 +59,16 @@
          * Creates copy buttons wrapped in a HTML div with given product ID and name values, at a given font size
          * Requires Google Fonts' Material Symbols
          * 
-         * @param {string} idValue - Product ID value to be copied
-         * @param {string} nameValue - Product name value to be copied
+         * @param {object} productData - { id: '12345', name: 'Product name' } - values to be copied
          * @param {object} additionalDivWrapperStyling - Tweak style further for different insertion contexts
          *      eg: { fontSize: '12px', gap: '1px', top '30%' }
          * @returns {HTMLElement} wrapper div containing both copy buttons
          */
-        createCopyButtonsWrapper(idValue, nameValue, additionalDivWrapperStyling) {
+        createCopyButtonsWrapper(productData, additionalDivWrapperStyling) {
             console.log(`${this.scriptTag} createCopyButtonsWrapper called`); // Keep basic console.log for remote scripts
 
-            const idButton = this.createCopyButton(CB_CONSTANTS.IconType.NAME, idValue);
-            const nameButton = this.createCopyButton(CB_CONSTANTS.IconType.ID, nameValue);
+            const idButton = this.createCopyButton(CB_CONSTANTS.IconType.NAME, productData.id);
+            const nameButton = this.createCopyButton(CB_CONSTANTS.IconType.ID, productData.name);
 
             const wrapper = document.createElement('div');
 
