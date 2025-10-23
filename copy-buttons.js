@@ -68,16 +68,16 @@
         createCopyButtonsWrapper(idValue, nameValue, additionalDivWrapperStyling) {
             console.log(`${this.scriptTag} createCopyButtonsWrapper called`); // Keep basic console.log for remote scripts
 
-            const idButton = this.createCopyButton(CB_CONSTANTS.IconType.ID, idValue);
-            const nameButton = this.createCopyButton(CB_CONSTANTS.IconType.NAME, nameValue);
+            const idButton = this.createCopyButton(CB_CONSTANTS.IconType.NAME, idValue);
+            const nameButton = this.createCopyButton(CB_CONSTANTS.IconType.ID, nameValue);
 
             const wrapper = document.createElement('div');
 
             Object.assign(wrapper.style, CB_BASE_STYLE.divWrapper);
             if (typeof additionalDivWrapperStyling !== 'undefined') Object.assign(wrapper.style, additionalDivWrapperStyling);
 
-            wrapper.appendChild(idButton); // Order of icons looks better this way
             wrapper.appendChild(nameButton);
+            wrapper.appendChild(idButton);
 
             return wrapper;
         },
