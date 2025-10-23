@@ -32,6 +32,7 @@
             title: "Copy product ID",
             style: {
                 cursor: "pointer",
+                fontSize: "inherit",
                 order: "0"
             }
         },
@@ -42,6 +43,7 @@
             title: "Copy product name",
             style: {
                 cursor: "pointer",
+                fontSize: "inherit",
                 order: "1"
             }
         },
