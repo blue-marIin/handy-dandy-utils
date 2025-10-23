@@ -32,6 +32,7 @@
             title: "Copy product ID",
             style: {
                 cursor: "pointer",
+                order: "0"
             }
         },
 
@@ -41,6 +42,7 @@
             title: "Copy product name",
             style: {
                 cursor: "pointer",
+                order: "1"
             }
         },
 
