@@ -76,8 +76,8 @@
             Object.assign(wrapper.style, CB_BASE_STYLE.divWrapper);
             if (typeof additionalDivWrapperStyling !== 'undefined') Object.assign(wrapper.style, additionalDivWrapperStyling);
 
-            wrapper.appendChild(nameButton);
             wrapper.appendChild(idButton); // Order of icons looks better this way
+            wrapper.appendChild(nameButton);
 
             return wrapper;
         },
