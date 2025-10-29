@@ -58,6 +58,7 @@
     // ===== MAIN =====
     window.CopyButtons = {
         scriptTag: '[CopyButtons]',
+        CONSTANTS: CB_CONSTANTS,
 
         /**
          * Creates copy buttons wrapped in a HTML div with given product ID and name values, at a given font size
