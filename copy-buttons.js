@@ -65,11 +65,11 @@
          * Requires Google Fonts' Material Symbols
          * 
          * @param {object} productData - { id: '12345', name: 'Product name' } - values to be copied
-         * @param {object} additionalDivWrapperStyling - Tweak style further for different insertion contexts
+         * @param {Partial<CSSStyleDeclaration>} additionalDivWrapperStyling - Tweak style further for different insertion contexts
          *      eg: { fontSize: '12px', gap: '1px', top '30%' }
          * @returns {HTMLElement} wrapper div containing both copy buttons
          */
-        createCopyButtonsWrapper(productData, additionalDivWrapperStyling = 'default') {
+        createCopyButtonsWrapper(productData, additionalDivWrapperStyling) {
             console.log(`${this.scriptTag} createCopyButtonsWrapper called`); // Keep basic console.log for remote scripts
 
             const idButton = this.createCopyButton(CB_CONSTANTS.IconType.ID, productData.id);
@@ -78,7 +78,7 @@
             const wrapper = document.createElement('div');
 
             Object.assign(wrapper.style, CB_BASE_STYLE.divWrapper);
-            if (typeof additionalDivWrapperStyling !== 'default') Object.assign(wrapper.style, additionalDivWrapperStyling);
+            if (additionalDivWrapperStyling && typeof additionalDivWrapperStyling === 'object') { Object.assign(wrapper.style, additionalDivWrapperStyling); }
 
             wrapper.appendChild(idButton);
             wrapper.appendChild(nameButton);
@@ -90,11 +90,11 @@
          * Create button element and assign value, styling and listener
          * @param {CB_CONSTANTS.IconType} buttonType - either CONSTANTS.IconType.NAME or CONSTANTS.IconType.ID
          * @param {string} buttonCopyData - Value to be copied
-         * @param {object} additionalButtonStyling - Tweak button styling further
+         * @param {Partial<CSSStyleDeclaration>} additionalButtonStyling - Tweak button styling further
          *      eg: { verticalAlign: 'text-top' }
-         * @returns {HTMLElement}
+         * @returns {HTMLButtonElement}
          */
-        createCopyButton(buttonType, buttonCopyData, additionalButtonStyling = 'default') {
+        createCopyButton(buttonType, buttonCopyData, additionalButtonStyling) {
             const button = document.createElement('span');
             const styleConfig = (buttonType === CB_CONSTANTS.IconType.ID)
                 ? CB_BASE_STYLE.idButton
@@ -105,7 +105,7 @@
             button.title = styleConfig.title;
 
             Object.assign(button.style, styleConfig.style);
-            if (typeof additionalButtonStyling !== 'default') Object.assign(button.style, additionalButtonStyling);
+            if (additionalButtonStyling && typeof additionalButtonStyling === 'object') { Object.assign(button.style, additionalButtonStyling); }
 
             button.addEventListener('click', () => {
                 navigator.clipboard.writeText(buttonCopyData)
