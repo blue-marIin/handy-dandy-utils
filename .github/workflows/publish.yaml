@@ -29,6 +29,11 @@ jobs:
       - name: Install semantic-release
         run: npm install -g semantic-release @semantic-release/git @semantic-release/changelog @semantic-release/github
 
+      - name: Build project
+        run: |
+          npm install typescript -g
+          tsc
+
       - name: Run semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
