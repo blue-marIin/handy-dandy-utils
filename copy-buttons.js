@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         (CopyButtons) Copy buttons generator
 // @namespace    https://github.com/blue-marIin/
-// @version      2.0
+// @version      2.1
 // @description  Helper function(s) for local scripts inserting product copy buttons
 // @author       BLUE MARLIN
 // @match        -
@@ -99,6 +99,17 @@
         },
 
         /**
+         * Check if payload data is ClipboardItem or plaintext and call appropriate clipboard method
+         * @param {string | ClipboardItem} data - Payload data to be copied: text/plain or text/html
+         * @returns Promise
+         */
+        smartClipboardWrite(data) {
+            return (data instanceof ClipboardItem)
+                ? navigator.clipboard.write([data]) // needs array
+                : navigator.clipboard.writeText(data);
+        },
+
+        /**
          * Create button element and assign value, styling and listener
          * @param {string} type - Type of button to be created. One of: [name, id, hyper]
          * @param {string} data - Value to be copied
@@ -121,9 +132,9 @@
             Object.assign(button.style, buttonConfig.style);
             if (extraStyling && typeof extraStyling === 'object') { Object.assign(button.style, extraStyling); }
 
-            // On click: copy data to clipboard, set icon to small check & set timeout to reset icon
+            // On click: copy payload to clipboard, set icon to small check & set timeout to reset icon
             button.addEventListener('click', () => {
-                navigator.clipboard.writeText(data)
+                this.smartClipboardWrite(data)
                     .then(() => {
                         button.textContent = CB_CONSTANTS.IconMap.CHECK;
                         setTimeout(() => button.textContent = buttonConfig.textContent, CB_CONSTANTS.buttonCheckTimeout);
