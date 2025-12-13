@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         (Fetch) Script loading
+// @name         UNUSED & UNMAINTAINED - (Fetch) Script loading
 // @namespace    https://github.com/blue-marIin/
 // @version      1.0
 // @description  Load private scripts

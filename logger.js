@@ -13,16 +13,14 @@
 
     window.Logger = {
         scriptTag: '[Logger]', // This script's own script ID
-        // Might be an idea to store all script ID tags in external, centralised location?
-        // Would have to be on local server which is subpar
+
+        defaultStyle: {
+            color: 'rgba(0, 179, 255, 1)',
+            fontWeight: 'bold'
+        },
 
         /**
          * Lightweight console logging helper for userscripts.
-         * Usage example:
-         *   const log = Logger('[MYSCRIPT]');
-         *   log.start();
-         *   log.info('Remote script:', remoteScript?.scriptTag);
-         *   log.end();
          */
         init(inputScriptTag) {
             const prefix = `%c${inputScriptTag}`;
