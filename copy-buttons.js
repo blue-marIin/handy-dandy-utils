@@ -2,7 +2,7 @@
 // @name         (CopyButtons) Copy buttons generator
 // @namespace    https://github.com/blue-marIin/
 // @version      2.1
-// @description  Helper function(s) for local scripts inserting product copy buttons
+// @description  Helper function(s) for local scripts inserting product copy buttons using Google Fonts' M.S & Icons
 // @author       BLUE MARLIN
 // @match        -
 // @grant        none
@@ -113,11 +113,12 @@
          * Create button element and assign value, styling and listener
          * @param {string} type - Type of button to be created. One of: [name, id, hyper]
          * @param {string} data - Value to be copied
+	 * @param {string} title - Button tooltip (shows on hover)
          * @param {Partial<CSSStyleDeclaration>} extraStyling - Tweak button styling further
          *      eg: { verticalAlign: 'text-top' }
          * @returns {HTMLButtonElement}
          */
-        createCopyButton(type, data, extraStyling) {
+        createCopyButton(type, data, title, extraStyling) {
             const buttonConfig = CB_BASE_STYLE[`${type}Button`];
 
             // Create button and assign HTML attributes
@@ -125,7 +126,7 @@
             Object.assign(button, {
                 className: buttonConfig.className,
                 textContent: buttonConfig.textContent,
-                title: buttonConfig.title
+                title: title ? title : buttonConfig.title // Empty string evaluates to false
             });
 
             // Assign base CSS style and if it was passed, assign extra styling
@@ -148,8 +149,12 @@
          * Creates copy buttons wrapped in a HTML div with given product ID and name values, at a given font size
          * Requires Google Fonts' Material Symbols
          *
-         * @param {object} productData - { id: '12345', name: 'Product name', hyper: {ClipboardItem} }
-         *      Button types to be created, and data to be copied.
+         * @param {object} productData - Button types to be created, and data to be copied.
+	 * 	{
+	 * 		id: [ productId, title ],
+	 * 		name: [ productName, title ],
+	 * 		hyper: [ {ClipboardItem}, title ]
+	 * 	}
          * @param {Partial<CSSStyleDeclaration>} extraDivStyling - Tweak style further for different insertion contexts
          *      eg: { fontSize: '12px', gap: '1px', top '30%' }
          * @returns {HTMLElement} wrapper div containing both copy buttons
@@ -164,10 +169,10 @@
             if (extraDivStyling && typeof extraDivStyling === 'object') { Object.assign(wrapper.style, extraDivStyling); }
 
             // Iterate through productData and create buttons for each valid item
-            for (const [type, data] of Object.entries(productData)) {
+            for (const [type, [data, title]] of Object.entries(productData)) {
                 // Only proceed if productData key is a valid button type ['id', 'name', 'hyper']
                 if (Object.keys(CB_CONSTANTS.buttonOrder).includes(type)) {
-                    let btn = this.createCopyButton(type, data);
+                    let btn = this.createCopyButton(type, data, title);
                     wrapper.appendChild(btn);
                 } else {
                     console.warn('Unable to create button. Invalid button type:', type, data);
