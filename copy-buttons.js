@@ -28,9 +28,9 @@
         }
     };
 
-    const googleFontsImportLink = `
-        https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&icon_names=${Object.values(CB_CONSTANTS.IconMap).sort().join()}
-    `; // icon_names must be in comma-separated alphabetical order or else import breaks
+    const defaultIcons = Object.values(CB_CONSTANTS.IconMap);
+
+    const googleFontsImportLink = 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&icon_names=';
 
     const CB_BASE_STYLE = {
         idButton: {
@@ -150,11 +150,11 @@
          * Requires Google Fonts' Material Symbols
          *
          * @param {object} productData - Button types to be created, and data to be copied.
-	 * 	{
-	 * 		id: [ productId, title ],
-	 * 		name: [ productName, title ],
-	 * 		hyper: [ {ClipboardItem}, title ]
-	 * 	}
+         * 	{
+         * 		id: [ productId, title ],
+         * 		name: [ productName, title ],
+         * 		hyper: [ {ClipboardItem}, title ]
+         * 	}
          * @param {Partial<CSSStyleDeclaration>} extraDivStyling - Tweak style further for different insertion contexts
          *      eg: { fontSize: '12px', gap: '1px', top '30%' }
          * @returns {HTMLElement} wrapper div containing both copy buttons
@@ -183,15 +183,41 @@
         },
 
         /**
-         * Add Google's Material Symbols content_copy, check_small, pin and link icons request to document head tag
+         * 
+         * @param {HTMLElement | null} link Link element to stylesheet for existing Google Fonts import or null
+         * @param {string[]} requestedIcons Icons to be appending to head
+         * @returns Sorted icon names array combining old & new icon names
          */
-        loadGoogleFontsIcons() {
-            if (document.querySelector(`link[href="${googleFontsImportLink.trim()}"]`)) return;
+        combineExistingIconsImport(link, requestedIcons) {
+            // If no existing import, return newIcons
+            if (link == null) return requestedIcons.sort().join();
+            
+            // If there's an existing import, combine icons from existing import & current request and return a new array
+            const existingIcons = link.getAttribute('href').trim().split('&icon_names=')[1].split(',');
+            return existingIcons.concat(requestedIcons).sort().join();
+        },
+
+        /**
+         * Add Google's Material Symbols icons request to document head tag, defaulting to default icons
+         */
+        loadGoogleFontsIcons(...icons) {
+            // Construct icon_names payload
+            //  - default to 'content_copy, check_small, pin & link' if parameters not provided
+            //  - sort alphabetically & convert to comma-separated string
+            let icons = icons.length ? icons : defaultIcons;
+
+            // Check if icons have already been imported - avoid appending duplicates
+            // Likely won't pick up native page imports of G.Fonts & will break in such cases
+            const existingIconsImportEl = document.querySelector(`link[href*="${googleFontsImportLink}"]`);
+            const iconNames = combineExistingIconsImport(existingIconsImportEl, icons);
+
+            const href = googleFontsImportLink + iconNames;
+
             console.log(`${this.scriptTag} loadGoogleFontsIcons called`);
 
             const link = document.createElement('link');
             link.rel = 'stylesheet';
-            link.href = googleFontsImportLink;
+            link.href = href;
             document.head.appendChild(link); // error checking needed? eg: try fetch(link), catch(error)
         }
     };
