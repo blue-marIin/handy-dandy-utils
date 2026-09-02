@@ -204,12 +204,12 @@
             // Construct icon_names payload
             //  - default to 'content_copy, check_small, pin & link' if parameters not provided
             //  - sort alphabetically & convert to comma-separated string
-            let icons = icons.length ? icons : defaultIcons;
+            const iconList = icons.length ? icons : defaultIcons;
 
             // Check if icons have already been imported - avoid appending duplicates
             // Likely won't pick up native page imports of G.Fonts & will break in such cases
             const existingIconsImportEl = document.querySelector(`link[href*="${googleFontsImportLink}"]`);
-            const iconNames = combineExistingIconsImport(existingIconsImportEl, icons);
+            const iconNames = this.combineExistingIconsImport(existingIconsImportEl, iconList);
 
             const href = googleFontsImportLink + iconNames;
 
